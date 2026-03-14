@@ -34,19 +34,19 @@
     updatePreview();
   }
 
-//  function submitMolecule() {
- //   const molfile = ChemDoodle.writeMOL(sketcher.getMolecule());
- //   const smiles = ChemDoodle.writeSMILES(sketcher.getMolecule());
+  function submitMolecule() {
+    const molfile = ChemDoodle.writeMOL(sketcher.getMolecule());
+    const smiles = ChemDoodle.writeSMILES(sketcher.getMolecule());
 
-   // fetch('https://yourserver.edu/submit', {  // Replace with your backend
-    //  method: 'POST',
-    //  headers: {'Content-Type': 'application/json'},
-    //  body: JSON.stringify({molfile, smiles})
-  //  })
-   // .then(resp => resp.json())
-  //  .then(data => alert(`Score: ${data.score}\nFeedback: ${data.message}`))
-  //  .catch(err => alert('Submission failed: ' + err));
-//  }
+    fetch('https://yourserver.edu/submit', {  // Replace with your backend
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({molfile, smiles})
+    })
+    .then(resp => resp.json())
+    .then(data => alert(`Score: ${data.score}\nFeedback: ${data.message}`))
+    .catch(err => alert('Submission failed: ' + err));
+  }
 </script>
 </body>
 </html>
