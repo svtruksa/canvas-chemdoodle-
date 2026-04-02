@@ -12,3 +12,27 @@
 </head> -->
 <body>
 <h2>Draw your molecule:</h2>
+
+<div class="row mb-4">
+<div class="col-xl-9">
+<script>
+  ChemDoodle.ELEMENT['H'].jmolColor = 'black';
+  ChemDoodle.ELEMENT['S'].jmolColor = '#B9A130';
+  let sketcher = new ChemDoodle.SketcherCanvas('sketcher', 500, 300,{useServices:true, oneMolecule:true});
+  sketcher.styles.atoms_displayTerminalCarbonLabels_2D = true;
+  sketcher.styles.atoms_useJMOLColors = true;
+  sketcher.styles.bonds_clearOverlaps_2D = true;
+  sketcher.styles.bonds_overlapClearWidth_2D = 2;
+  sketcher.repaint();
+  function alertMolecule(mol){
+    let message = 'This molecule contains '+mol.atoms.length+' atoms and '+mol.bonds.length+' bonds.';
+    alert(message);
+  }
+</script>
+</div>
+
+<div class="col-xl-3 pt-xl-5 mt-xl-5">
+<div class="row d-flex justify-content-start"><a class="btn btn--primary type--uppercase ml-3 mt-3" href="#customise-template" onclick="alertMolecule(sketcher.getMolecule());"> <span class="btn__text">Count Atoms and Bonds</span> </a></div><div class="row d-flex justify-content-start"><a class="btn btn--primary type--uppercase ml-3 mt-3" href="#customise-template" onclick="alert(ChemDoodle.writeMOL(sketcher.getMolecule()));"> <span class="btn__text">Generate MOLFile (v2000)</span> </a></div><div class="row d-flex justify-content-start"><a class="btn btn--primary type--uppercase ml-3 mt-3" href="#customise-template" onclick="alert(ChemDoodle.writeMOLV3(sketcher.getMolecule()));"> <span class="btn__text">Generate MOLFile (v3000)</span> </a></div><div class="row d-flex justify-content-start"><a class="btn btn--primary type--uppercase ml-3 mt-3" href="#customise-template" onclick="ChemDoodle.iChemLabs.writeSMILES([sketcher.getMolecule()], [], {}, function(smiles){alert(smiles);});"> <span class="btn__text">Generate SMILES</span> </a></div></div>
+</div>
+
+<p>Feel free to continue to change the molecule in the sketcher; the buttons will continue to retrieve the latest molecule and execute functions on it. The method for doing this is actually very trivial. There is a <em>Canvas.getMolecule()</em> function that will return the <em>Molecule</em> data structure owned by the <em>Canvas</em>. Therefore, at any time, you can retrieve the contained <em>Molecule</em> from any <em>Canvas</em> on your webpage. The following source illustrates how the <strong>Count Atoms and Bonds</strong> button works.</p>
